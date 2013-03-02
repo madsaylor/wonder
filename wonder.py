@@ -23,7 +23,8 @@ def get_long_lat():
 	sun = ephem.Sun()
 	context = {
 	    'sunrise' : str(ephem.localtime( observer.next_rising(sun))),
-	    'sunset'  : str(ephem.localtime(observer.next_setting(sun)))
+	    'sunset'  : str(ephem.localtime(observer.next_setting(sun))),
+	    'log' : str(request.headers)
 	}
 	return json.dumps(context)
 
