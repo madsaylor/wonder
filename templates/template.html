@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<title>Project Wonder</title>
+		<style src='style.css'></style>
+		<script src="http://yandex.st/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+		<script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU&onload=init" type="text/javascript"></script>		
+		<script>
+			 ymaps.ready(function () {
+				$('.location').html(ymaps.geolocation.city);
+				$.post("/coords", { lat:ymaps.geolocation.latitude, lon:ymaps.geolocation.longitude }, 
+					function(data){
+						result = $.parseJSON(data);
+						$('.sunrise').html(result.sunrise);	
+						$('.sunset').html(result.sunset);	
+					});
+			});
+		</script>
+	</head>
+	<body>
+		<section>
+			<div class='location'></div>
+			<div>Sunrise:&nbsp;<span class='sunrise'>{{ sunrise }}</span></div>
+			<div>Sunset:&nbsp;<span class='sunset'>{{ sunset }}</span></div>		
+		</section>
+	</body>
+</html>
