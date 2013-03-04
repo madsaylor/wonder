@@ -31,4 +31,4 @@ def get_long_lat():
 	return json.dumps(context)
 
 if __name__ == "__main__":
-  	app.run(debug='true')
+  	app.run(host = '0.0.0.0', debug='true')
