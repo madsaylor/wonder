@@ -19,13 +19,17 @@ def hello():
 def get_long_lat():	
 	lat = str(request.form.get('lat',''))
 	lon = str(request.form.get('lon',''))
-	delta = timedelta(minutes = int(request.form.get('offset','')))
+	offset = int(request.form.get('offset',''))
+	delta = timedelta(minutes = offset)
 	observer = ephem.Observer()
 	observer.lon, observer.lat = lon,lat
 	sun = ephem.Sun()
+	sunrise_utc = observer.next_rising(sun).datetime()
+	sunset_utc = observer.next_setting(sun).datetime()
+
 	context = {
-	    'sunrise' : str(observer.next_rising(sun).datetime() + delta),
-	    'sunset'  : str(observer.next_setting(sun).datetime() + delta),
+	    'sunrise' : str(sunrise_utc + delta),
+	    'sunset'  : str(sunset_utc + delta),
 	    'log' : str(ephem.localtime(observer.next_rising(sun)))
 	}
 	return json.dumps(context)
