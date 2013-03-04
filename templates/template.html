@@ -6,8 +6,9 @@
 		<script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU&onload=init" type="text/javascript"></script>		
 		<script>
 			 ymaps.ready(function () {
+			 	var time = new Date(); 
 				$('.location').html(ymaps.geolocation.city);
-				$.post("/coords", { lat:ymaps.geolocation.latitude, lon:ymaps.geolocation.longitude }, 
+				$.post("/coords", { lat:ymaps.geolocation.latitude, lon:ymaps.geolocation.longitude, offset:-1*time.getTimezoneOffset()}, 
 					function(data){
 						result = $.parseJSON(data);
 						$('.sunrise').html(result.sunrise);	
