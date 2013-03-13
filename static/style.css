@@ -1,0 +1,12 @@
+.container{
+	border: 1px solid black;
+	width: 400px;	
+	position: relative;
+	top: 20%;
+	display: inline-block;
+	border-radius: 13px;
+	padding: 10px;	
+}
+body{
+	text-align: center;
+}
