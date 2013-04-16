@@ -14,12 +14,12 @@
 						$('.sunrise').html(result.sunrise);	
 						$('.sunset').html(result.sunset);	
 						console.log(result.log);
-					});
-				
+					});				
 			});
 		</script>
-	</head>
+	</head>	
 	<body>
+		<img src='{{ url_for('static',filename='img/bg.jpg') }}' class='bg'/>
 		<section class='container'>
 			<div>Вы в городе&nbsp;<span class='location'></span></div>
 			<div>Восход:&nbsp;<span class='sunrise'>{{ sunrise }}</span></div>

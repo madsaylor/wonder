@@ -1,12 +1,23 @@
 .container{
 	border: 1px solid black;
-	width: 400px;	
-	position: relative;
-	top: 20%;
 	display: inline-block;
 	border-radius: 13px;
-	padding: 10px;	
-}
-body{
+	padding: 10px;
+	width: 200px;	
+	height:200px;
+	position: relative;
+	top: 20%;
+	left:10%;
 	text-align: center;
+}
+
+body{
+	
+}
+
+.bg {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
