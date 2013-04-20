@@ -1,29 +1,30 @@
 <html>
 	<head>
-		<title>Project Wonder</title>
+		<title>Sunrise Industries</title>
 		<link rel='stylesheet' type='text/css' href='{{url_for('static',filename='style.css')}}'>
+		<link href='http://fonts.googleapis.com/css?family=PT+Sans&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 		<script src="http://yandex.st/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
-		<script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU&onload=init" type="text/javascript"></script>		
+		<script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU&onload=init" type="text/javascript">
+		</script>		
 		<script>
 			 ymaps.ready(function () {
 			 	var time = new Date(); 
 				$('.location').html(ymaps.geolocation.city);
-				$.post("/coords", { lat:ymaps.geolocation.latitude, lon:ymaps.geolocation.longitude, offset:-1*time.getTimezoneOffset()}, 
+				$.post("/coords", { lat:ymaps.geolocation.latitude, lon:ymaps.geolocation.longitude, offset:-time.getTimezoneOffset()}, 
 					function(data){
-						result = $.parseJSON(data);
-						$('.sunrise').html(result.sunrise);	
-						$('.sunset').html(result.sunset);	
+						result = $.parseJSON(data);																		
+						$('.statetime').html(result.statetime);
+						var verb = (result.sunstate === 'sunset') ? 'сядет' : 'встанет';
+						$('.stateverb').html(verb);
 						console.log(result.log);
 					});				
 			});
 		</script>
 	</head>	
-	<body>
-		<img src='{{ url_for('static',filename='img/bg.jpg') }}' class='bg'/>
+	<body>		
 		<section class='container'>
-			<div>Вы в городе&nbsp;<span class='location'></span></div>
-			<div>Восход:&nbsp;<span class='sunrise'>{{ sunrise }}</span></div>
-			<div>Закат:&nbsp;<span class='sunset'>{{ sunset }}</span></div>		
+			<div>В городе:&nbsp;<p class='location'></p></div>
+			<div>Солнце <span class='stateverb'></span> в:<p class='statetime'>{{ statetime }}</p></div>			
 		</section>
 	</body>
 </html>

@@ -2,11 +2,11 @@
 import json
 from flask import Flask, render_template, request
 app = Flask(__name__)
-from datetime import timedelta
+from datetime import timedelta, datetime
 import ephem
 
 @app.route("/")
-def hello():
+def hello():	
     #получить координаты и местное время клиента
     observer = ephem.Observer()
     observer.lon, observer.lat = '32','50' 
@@ -24,14 +24,25 @@ def get_long_lat():
 	observer = ephem.Observer()
 	observer.lon, observer.lat = lon,lat
 	sun = ephem.Sun()
+	
 	sunrise_utc = observer.next_rising(sun).datetime()
 	sunset_utc = observer.next_setting(sun).datetime()
+		
+	if  sunrise_utc > sunset_utc:
+		statetime_utc = sunset_utc
+		sunstate = 'sunset'
+	else:
+		statetime_utc = sunrise_utc
+		sunstate = 'sunrise'
 
+	statetime = statetime_utc + delta	
+	
 	context = {
-	    'sunrise' : str(sunrise_utc + delta),
-	    'sunset'  : str(sunset_utc + delta),
-	    'log' : str(ephem.localtime(observer.next_rising(sun)))
+	    'sunstate' : sunstate,	
+	    'statetime'  : '{0}:{1}'.format(statetime.hour,statetime.strftime('%M')), 
+	    'log' : sunstate
 	}
+
 	return json.dumps(context)
 
 if __name__ == "__main__":
