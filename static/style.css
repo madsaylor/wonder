@@ -18,6 +18,7 @@ body{
 	background: url('/static/img/bg.jpg');
 	background-size: cover;
 	font-family: 'PT Sans', sans-serif;
+	font-size: 17px;
 }
 
 .location {

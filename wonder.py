@@ -5,7 +5,7 @@ app = Flask(__name__)
 from datetime import timedelta, datetime
 import ephem
 
-@app.route("/")
+@app.route("/sun")
 def hello():	
     #получить координаты и местное время клиента
     observer = ephem.Observer()
