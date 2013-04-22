@@ -7,13 +7,7 @@ import ephem
 
 @app.route("/sun")
 def hello():	
-    #получить координаты и местное время клиента
-    observer = ephem.Observer()
-    observer.lon, observer.lat = '32','50' 
-    sun = ephem.Sun()
-    context = {'sunrise' : str(ephem.localtime(observer.next_rising(sun))),
-    		   'sunset'  : str(ephem.localtime(observer.next_setting(sun)))}
-    return render_template('template.html', **context)	
+    return render_template('template.html')	
 
 @app.route("/coords", methods = ['POST'])
 def get_long_lat():	
