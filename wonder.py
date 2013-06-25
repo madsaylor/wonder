@@ -7,7 +7,7 @@ import ephem
 
 @app.route("/sun")
 def hello():	
-    return render_template('template.html')	
+	return render_template('template.html')	
 
 @app.route("/coords", methods = ['POST'])
 def get_long_lat():	
@@ -22,7 +22,7 @@ def get_long_lat():
 	sunrise_utc = observer.next_rising(sun).datetime()
 	sunset_utc = observer.next_setting(sun).datetime()
 		
-	if  sunrise_utc > sunset_utc:
+	if sunrise_utc > sunset_utc:
 		statetime_utc = sunset_utc
 		sunstate = 'sunset'
 	else:
@@ -32,12 +32,12 @@ def get_long_lat():
 	statetime = statetime_utc + delta	
 	
 	context = {
-	    'sunstate' : sunstate,	
-	    'statetime'  : '{0}:{1}'.format(statetime.hour,statetime.strftime('%M')), 
-	    'log' : sunstate
+		'sunstate' : sunstate,	
+		'statetime'  : '{0}:{1}'.format(statetime.hour,statetime.strftime('%M')), 
+		'log' : sunstate
 	}
 
 	return json.dumps(context)
 
 if __name__ == "__main__":
-  	app.run(host = '0.0.0.0', debug='true')
+	app.run(host = '0.0.0.0', debug='true')
