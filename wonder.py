@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
 import json
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 app = Flask(__name__)
 from datetime import timedelta, datetime
 import ephem
+
+
+@app.route("/")
+def root():	
+	return redirect(url_for('hello'))	
 
 @app.route("/sun")
 def hello():	
