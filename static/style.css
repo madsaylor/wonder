@@ -19,6 +19,8 @@ body{
 	background-size: cover;
 	font-family: 'PT Sans', sans-serif;
 	font-size: 17px;
+	background-attachment: fixed;
+  	background-repeat: no-repeat;
 }
 
 .location {
