@@ -4,6 +4,7 @@
 		<link rel='stylesheet' type='text/css' href='{{url_for('static',filename='style.css')}}'>
 		<link href='http://fonts.googleapis.com/css?family=PT+Sans&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 		<script src="http://yandex.st/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+
 		<script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU&onload=init" type="text/javascript">
 		</script>		
 		<script>
@@ -19,7 +20,36 @@
 						console.log(result.log);
 					});				
 			});			 
-		</script>		
+		</script>
+
+		<!-- Картинки на задник -->
+		<script src="https://www.google.com/jsapi" type="text/javascript"></script>
+		<script>
+		$(document).on("ready", function() {
+			// create query
+			var monthNames = ["январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь"];
+			var q = monthNames[(new Date()).getMonth()] + "+природа";
+			console.log(q);
+
+			// search
+			$.ajax({
+				url: "https://www.googleapis.com/customsearch/v1?key=AIzaSyC_QleQslgxwueMKYjMSL6leub_Gst1mgc&cx=010367588730355710032:i4pxsroxu6i&q="+q+"&imgSize=huge&searchType=image"
+			}).done(function(result) {
+				console.log(result.items);
+				var i = parseInt(Math.floor(Math.random()*result.items.length));
+				console.log(i, result.items[i].link);
+
+				// make background
+				$("body").css({
+					"background-image": "url("+result.items[i].link+")",
+					"background-size": "cover",
+					"background-position": "center center",
+					"box-shadow": "inset 0px 0px 400px 0px rgba(0,0,0,0.8)",
+					"margin": 0
+				});
+			});
+		});
+		</script>
 	</head>	
 	<body>		
 		<section class='container'>
