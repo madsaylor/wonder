@@ -22,29 +22,19 @@
 			});			 
 		</script>
 
-		<!-- Картинки на задник -->
-		<script src="https://www.google.com/jsapi" type="text/javascript"></script>
+		<!-- Картинки на задник -->		
 		<script>
 		$(document).on("ready", function() {
-			// create query
-			var monthNames = ["январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь"];
-			var q = monthNames[(new Date()).getMonth()] + "+природа";
-			console.log(q);
-
-			// search
-			$.ajax({
-				url: "https://www.googleapis.com/customsearch/v1?key=AIzaSyC_QleQslgxwueMKYjMSL6leub_Gst1mgc&cx=010367588730355710032:i4pxsroxu6i&q="+q+"&imgSize=huge&searchType=image"
-			}).done(function(result) {
-				console.log(result.items);
-				var i = parseInt(Math.floor(Math.random()*result.items.length));
-				console.log(i, result.items[i].link);
+			$.get("/imageurls", function(data){
+				result = JSON.parse(data);
+				var i = parseInt(Math.floor(Math.random()*result.length));
 
 				// make background
 				$("body").css({
-					"background-image": "url("+result.items[i].link+")",
+					"background-image": "url("+result[i]+")",
 					"background-size": "cover",
 					"background-position": "center center",
-					"box-shadow": "inset 0px 0px 400px 0px rgba(0,0,0,0.8)",
+					"box-shadow": "inset 0px 0px 200px 0px rgba(0,0,0,0.8)",
 					"margin": 0
 				});
 			});

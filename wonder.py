@@ -14,6 +14,13 @@ def root():
 def hello():	
 	return render_template('template.html')	
 
+	
+@app.route("/imageurls", methods = ['GET'])
+def get_image_links():
+	with open('image_search_results.json') as f:
+		return f.read()
+	
+
 @app.route("/coords", methods = ['POST'])
 def get_long_lat():	
 	lat = str(request.form.get('lat',''))
