@@ -18,8 +18,5 @@ for i in range(10):
     search_results = r.json()
     links += [r['link'] for r in search_results['items']]
 
-for i in links:
-    print i
-
 with open('image_search_results.json', 'w') as f:
     json.dump(list(set(links)), f)
