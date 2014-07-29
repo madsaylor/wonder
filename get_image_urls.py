@@ -11,10 +11,15 @@ theme = u' природа'.encode('utf8')
 query = month + theme
 
 url = u'https://www.googleapis.com/customsearch/v1?key=AIzaSyC_QleQslgxwueMKYjMSL6leub_Gst1mgc&cx=010367588730355710032:i4pxsroxu6i&{}&imgSize=huge&searchType=image'.format(urlencode({'q': query}))
+links = []
 
-r = requests.get(url)
-search_results = r.json()
-links = [r['link'] for r in search_results['items']]
+for i in range(10):
+    r = requests.get(url)
+    search_results = r.json()
+    links += [r['link'] for r in search_results['items']]
+
+for i in links:
+    print i
 
 with open('image_search_results.json', 'w') as f:
-    json.dump(links, f)
+    json.dump(list(set(links)), f)
