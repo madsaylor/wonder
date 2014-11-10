@@ -26,11 +26,15 @@
 
 		<!-- Картинки на задник -->		
 		<script>
+		var imageUrls;
+		var currentImageNumber;
+		
 		$(document).on("ready", function() {
 			$.get("/imageurls", function(data){
 				result = JSON.parse(data);
+				imageUrls = result;
 				var i = parseInt(Math.floor(Math.random()*result.length));
-
+				currentImageNumber = i;
 				// make background
 				$("body").css({
 					"background-image": "url("+result[i]+")",
@@ -39,6 +43,13 @@
 					"box-shadow": "inset 0px 0px 200px 0px rgba(0,0,0,0.8)",
 					"margin": 0
 				});
+			});
+
+			$('body').click(function(){				
+				if(currentImageNumber >= imageUrls.length){
+					currentImageNumber = 0;
+	 			}       
+				$("body").css("background-image", "url("+imageUrls[currentImageNumber++]+")"); 
 			});
 		});
 		</script>
