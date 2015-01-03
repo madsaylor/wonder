@@ -32,3 +32,21 @@ body{
     font-size: 25px;
     margin-top: 7px;
 }
+
+.right-arrow, .left-arrow{
+    position: absolute;
+    top: 50%;
+    font-size: 60px;
+}
+
+.right-arrow span, .left-arrow span{
+    cursor: pointer;
+}
+
+.right-arrow{
+    right: 0;
+}
+
+.left-arrow{
+    left: 0;
+}
